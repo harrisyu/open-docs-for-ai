@@ -1,0 +1,17 @@
+index.html
+404.html
+genindex.html
+search.html
+
+about/*
+contributing/*
+community/*
+tutorials/vr/*
+
+development/compiling/*
+development/cpp/*
+development/editor/*
+development/*
+
+getting_started/*
+tutorials/*

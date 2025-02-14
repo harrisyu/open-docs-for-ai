@@ -1,0 +1,12 @@
+index.html
+404.html
+genindex.html
+search.html
+
+about/*
+contributing/*
+community/*
+tutorials/xr/*
+
+getting_started/*
+tutorials/*
