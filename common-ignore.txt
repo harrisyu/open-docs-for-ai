@@ -1,0 +1,5 @@
+*/index.html
+index.html
+404.html
+genindex.html
+search.html

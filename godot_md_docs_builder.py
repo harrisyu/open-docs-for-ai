@@ -4,6 +4,9 @@
 # python godot_md_docs_builder.py --combine D:\local_docs\godot-docs-html-3.6\classes out\godot-3.6-classes.md --workers 12 --ignore-file godot-3.6-classes-ignore.txt
 # python godot_md_docs_builder.py D:\local_docs\godot-docs-html-master\ out\godot-latest-docs\ --workers 12 --clean --ignore-file godot-latest-docs-ignore.txt
 # python godot_md_docs_builder.py D:\local_docs\godot-docs-html-3.6\ out\godot-3.6-docs\ --workers 12 --clean --ignore-file godot-3.6-docs-ignore.txt
+# python godot_md_docs_builder.py --combine D:\local_docs\godot-docs-html-master\tutorials\scripting\gdscript\ out\godot-latest-docs\tutorials\scripting\gdscript.md --workers 12 --ignore-file common-ignore.txt
+# python godot_md_docs_builder.py --combine D:\local_docs\godot-docs-html-3.6\tutorials\scripting\gdscript\ out\godot-3.6-docs\tutorials\scripting\gdscript.md --workers 12 --ignore-file common-ignore.txt
+
 
 import os
 import argparse
@@ -153,6 +156,7 @@ def convert_html_to_markdown(html_file, base_path):
     full_content = re.sub(r"🔗", "", full_content)  # Remove link emoji
 
     # Convert [code] tags to markdown code blocks with GDScript language tag
+    # TODO: only add GDScript language tag if the code block is actually GDScript
     full_content = re.sub(
         r"\[code\]([\s\S]*?)\[/code\]",  # Capture everything including whitespace
         lambda m: (
@@ -369,9 +373,15 @@ if __name__ == "__main__":
                 shutil.rmtree(args.output_path)
                 print(f"Cleaned output directory: {args.output_path}")
 
-    # Create output directory if not combining and directory doesn't exist
-    if not args.combine and not os.path.exists(args.output_path):
-        os.makedirs(args.output_path)
+    # Create output directory if needed
+    if args.combine:
+        # For combined output, ensure parent directory exists
+        ensure_directory_exists(args.output_path)
+    else:
+        # For separate files, create output directory
+        if not os.path.exists(args.output_path):
+            os.makedirs(args.output_path)
+            print(f"Created output directory: {args.output_path}")
 
     process_html_docs_folder(
         args.input_dir,

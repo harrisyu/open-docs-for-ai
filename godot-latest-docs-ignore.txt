@@ -1,10 +1,20 @@
-index.html
+*/index.html
 404.html
 genindex.html
 search.html
 
 about/*
-contributing/*
+
+contributing/development/compiling/*
+contributing/development/configuring_an_ide/*
+contributing/development/core_and_modules/*
+contributing/development/debugging/*
+contributing/development/editor/*
+contributing/development/*.md
+contributing/contributing/*
+contributing/documentation/*
+contributing/workflow/*
+contributing/how_to_contribute.md
 community/*
 tutorials/xr/*
 
